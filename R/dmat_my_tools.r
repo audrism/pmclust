@@ -49,13 +49,13 @@ set.global.dmat <- function(K = 2, X.dmat = NULL, PARAM = NULL,
 
   .pmclustEnv$p.times.logtwopi <- p * log(2 * pi)
 
-  .pmclustEnv$Z.dmat <- pbdDMAT::ddmatrix(0, N, K)
+  .pmclustEnv$Z.dmat <- pbdDMAT::diag(x=0, nrow=N, ncol=K, type="ddmatrix")
   .pmclustEnv$Z.colSums <- as.vector(colSums(.pmclustEnv$Z.dmat))
 
-  .pmclustEnv$W.dmat <- pbdDMAT::ddmatrix(0, N, K)
+  .pmclustEnv$W.dmat <- pbdDMAT::diag(x=0, nrow=N, ncol=K, type="ddmatrix")
   .pmclustEnv$W.rowSums <- as.vector(rowSums(.pmclustEnv$W.dmat))
 
-  .pmclustEnv$U.dmat <- pbdDMAT::ddmatrix(0, N, K)
+  .pmclustEnv$U.dmat <- pbdDMAT::diag(x=0, nrow=N, ncol=K, type="ddmatrix")
 
   # .pmclustEnv$CLASS.dmat <- pbdDMAT::ddmatrix(0, N, 1)
   .pmclustEnv$CLASS <- rep(0, N)	# This is not a ddmatrix.
