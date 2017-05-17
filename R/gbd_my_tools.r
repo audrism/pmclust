@@ -3,18 +3,14 @@ set.global.gbd <- function(K = 2, X.gbd = NULL, PARAM = NULL,
     algorithm = c("em", "aecm", "apecm", "apecma", "kmeans"),
     RndEM.iter = 10){
   if(is.null(X.gbd)){
-    if(exists("X.gbd", envir = .pmclustEnv)){
-      .pmclustEnv$X.spmd <- X.gbd
+    A <- exists("X.gbd", envir = .GlobalEnv)
+    B <- exists("X.spmd", envir = .GlobalEnv)
+    if(A){
+      .pmclustEnv$X.spmd <- get("X.gbd", envir = .GlobalEnv)
+    } else if(B){
+      .pmclustEnv$X.spmd <- get("X.spmd", envir = .GlobalEnv)
     } else{
-      A <- exists("X.gbd", envir = .GlobalEnv)
-      B <- exists("X.spmd", envir = .GlobalEnv)
-      if(A){
-        .pmclustEnv$X.spmd <- get("X.gbd", envir = .GlobalEnv)
-      } else if(B){
-        .pmclustEnv$X.spmd <- get("X.spmd", envir = .GlobalEnv)
-      } else{
-        comm.stop("A global X.gbd or X.spmd does not exist.")
-      }
+      comm.stop("A global X.gbd or X.spmd does not exist.")
     }
   } else{
     .pmclustEnv$X.spmd <- X.gbd
